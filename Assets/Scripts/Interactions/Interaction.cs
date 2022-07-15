@@ -12,16 +12,21 @@ public class Interaction : MonoBehaviour{
     private Coroutine save = null;
     Action exitAction = null;
 
+    private bool notUsing = true;
+
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Player"){
+        if(notUsing && other.gameObject.tag == "Player"){
             save = StartCoroutine(StartInteraction(
                     other.gameObject.GetComponent<PlayerController>()));
+                
+            notUsing = false;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if(save != null){
             StopInteraction();
+            notUsing = true;
         }
     }
 
