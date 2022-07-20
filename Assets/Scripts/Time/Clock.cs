@@ -9,7 +9,7 @@ using TMPro;
     20 seconds in the real life 1 minute in the game passes
 */
 
-public class Clock : MonoBehaviour{
+public class Clock : Subject{
     [SerializeField] TextMeshProUGUI clockReference = default;
     [SerializeField] TextMeshProUGUI daysReference = default;
 
@@ -24,7 +24,7 @@ public class Clock : MonoBehaviour{
 
     public void addSeconds(int time){
         actualSeconds += time;
-        int countMinutes = UtilInt.checkBound(actualSeconds, minutesDilution);
+        int countMinutes = UtilInt.checkBound(ref actualSeconds, minutesDilution);
 
         if(countMinutes < 1) return;
 
@@ -32,10 +32,13 @@ public class Clock : MonoBehaviour{
     }
 
     public void addMinutes(int time){
+        if(time < 1) return;
+
         actualMinutes += time;
-        
-        actualHours += UtilInt.checkBound(actualMinutes, 60);
+        actualHours += UtilInt.checkBound(ref actualMinutes, 60);
+
         ChangeActualTime();
+        Notify(time);
     }
 
     public void SetTime(int hours, int minutes){
@@ -59,11 +62,20 @@ public class Clock : MonoBehaviour{
             DayChange(1);
         }
 
-        clockReference.text = actualHours.ToString() + ":" + actualMinutes.ToString();
+        clockReference.text = 
+            UtilStrings.ConvertPositiveNumberToFixedSize(actualHours, 2) + ":" + 
+            UtilStrings.ConvertPositiveNumberToFixedSize(actualMinutes, 2);
     }
 
     private void DayChange(int addiction){
         daysCount += addiction;
         daysReference.text = daysCount.ToString();
+    }
+
+    //Observer pattern
+    protected override void Notify(int value){
+        foreach (Observer ob in observers){
+            ob.OnNotify(value);
+        }
     }
 } 

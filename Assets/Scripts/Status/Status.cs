@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TypeStatus{
     Hunger,
@@ -22,13 +24,17 @@ public enum TypeStatus{
     He verify if killerStatus is true, if it's then he gets the sum of the bad values
 */
 
-public class Status : MonoBehaviour{
-    [SerializeField] TypeStatus status = default; //Always, always build the list in order
-    [SerializeField] int minutesDilution = default;
-    [SerializeField] int killerStatus = default; //100 is the max, 0 is no kill
-    [SerializeField] int actionDeficiencyStatus = default; //100 is the max, 0 is no affect
+[System.Serializable]
 
-    private int actualValueStatus = 100;
+public class Status{
+    [SerializeField] TypeStatus status = default; //Always, always build the list in order
+    [SerializeField] Sprite icon = default;
+
+    [SerializeField] int minutesDilution = default; //X minutes takes 1 value
+    [SerializeField] float killerStatus = default; //100 is the max, 0 is no kill
+    [SerializeField] float actionDeficiencyStatus = default; //100 is the max, 0 is no affect
+
+    [SerializeField] int actualValueStatus = 100;
     private int limit = 100;
 
     private int countLastTimeStatusIncreaced = 0;
@@ -36,12 +42,14 @@ public class Status : MonoBehaviour{
     public bool IncreaceTime(int time){
         countLastTimeStatusIncreaced += time;
 
-        int statusDecreace = UtilInt.checkBound(countLastTimeStatusIncreaced, minutesDilution);
+        int statusDecreace = UtilInt.checkBound(ref countLastTimeStatusIncreaced, minutesDilution);
 
         return IncreaceStatus(-statusDecreace);
     }
 
     public bool IncreaceStatus(int statusIncreace){
+        if(statusIncreace == 0) return false;
+
         actualValueStatus += statusIncreace;
 
         if(actualValueStatus < 1){
@@ -53,14 +61,26 @@ public class Status : MonoBehaviour{
             actualValueStatus = 100;
         }
 
-        return false;
+        return true;
     }
 
-    public int KillerStatusVerify(){
+    public string GetStatusName(){
+        return status.ToString();
+    }
+
+    public int GetActualValueStatus(){
+        return actualValueStatus;
+    }
+
+    public Sprite GetIcon(){
+        return icon;
+    } 
+
+    public float GetKillerStatusVerify(){
         return killerStatus;
     }
 
-    public int ActionDeficiencyStatusVerify(){
+    public float GetActionDeficiencyStatusVerify(){
         return actionDeficiencyStatus;
     }
 }
