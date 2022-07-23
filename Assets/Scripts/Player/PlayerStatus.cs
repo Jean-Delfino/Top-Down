@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStatus : Observer{
-    private int health = 0;
+    protected float health = 0;
 
     [Space]
     [Header("Status variables")]
@@ -15,6 +15,11 @@ public class PlayerStatus : Observer{
 
     [SerializeField] List<Status> needs = default;
 
+    // [Space]
+    // [Header("Player inventory variables")]
+    // [Space]
+
+    // [SerializeField] PlayerInventory inventory = default;
 
     private void Start() {
         toSubscribe.RegisterObserver(this);
@@ -30,16 +35,25 @@ public class PlayerStatus : Observer{
         for(i = 0; i < needs.Count; i++){
             changeValue = needs[i].IncreaceTime(timeChange);
 
-            if(changeValue){
-                pSM.ChangeStatus(needs[i], i);
-            }
+            CheckStatus(changeValue, i);
         }
     }
 
-    private void ChangeLife(int amount){
+    public void ChangeStatus(int index, int value){
+        bool changeValue = needs[index].IncreaceStatus(value);
+
+        CheckStatus(changeValue, index);
+    }
+
+    private void CheckStatus(bool change, int index){
+        if(change){
+            pSM.ChangeStatus(needs[index], index);
+        }
+    }
+
+    public void ChangeLife(float amount){
         health += amount;
 
         pSM.ChangeSliderHealth(health);
     }
-
 }

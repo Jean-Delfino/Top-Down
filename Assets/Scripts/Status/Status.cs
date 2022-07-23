@@ -12,6 +12,21 @@ public enum TypeStatus{
     Happiness
 }
 
+[System.Serializable]
+
+public class StatusChange{
+    [SerializeField] TypeStatus status = default; //Always, always build the list in order
+    [SerializeField] int value;
+
+    public int GetValueChange(){
+        return value;
+    }
+
+    public int GetStatus(){
+        return (int) status;
+    }
+}
+
 /*
     Every minute in game * minutesDilution takes 1 point from actualValueStatus,
     This is counted in countLastTimeStatusIncreaced

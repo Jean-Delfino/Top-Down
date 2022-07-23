@@ -37,7 +37,7 @@ public class PlayerStatusUIManager : MonoBehaviour{
         }
     }
 
-    public void ChangeSliderHealth(int value){
+    public void ChangeSliderHealth(float value){
         healthSlider.value = value;
 
         healthFillImage.color = healthGradient.Evaluate(healthSlider.normalizedValue);
