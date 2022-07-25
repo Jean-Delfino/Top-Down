@@ -11,7 +11,7 @@ using UnityEngine;
 public class Purse : MonoBehaviour{
     private float money = 0;
 
-    private List<Item> inventory = new List<Item>();
+    private Bag bag = new Bag();
 
     public void IncreaceMoney(float amount){
         money += amount;
@@ -19,5 +19,9 @@ public class Purse : MonoBehaviour{
 
     public float GetMoney(){
         return money;
+    }
+
+    public Bag GetBag(){
+        return bag;
     }
 }

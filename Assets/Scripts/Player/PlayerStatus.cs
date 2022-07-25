@@ -15,11 +15,11 @@ public class PlayerStatus : Observer{
 
     [SerializeField] List<Status> needs = default;
 
-    // [Space]
-    // [Header("Player inventory variables")]
-    // [Space]
+    [Space]
+    [Header("Inventory variables")]
+    [Space]
 
-    // [SerializeField] PlayerInventory inventory = default;
+    [SerializeField] PlayerInventory playerInventory = default;
 
     private void Start() {
         toSubscribe.RegisterObserver(this);
@@ -55,5 +55,13 @@ public class PlayerStatus : Observer{
         health += amount;
 
         pSM.ChangeSliderHealth(health);
+    }
+
+    public Bag GetInventoryBag(){
+        return playerInventory.GetBag();
+    }
+
+    public string GetInitialBagName(){
+        return playerInventory.GetInitialBagName();
     }
 }

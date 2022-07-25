@@ -5,19 +5,31 @@ using UnityEngine;
 using TMPro;
 
 public class PlayerInventory : Purse{
+    [Space]
+    [Header("Money attributes")]
+    [Space]
+
     [SerializeField] TextMeshProUGUI moneyOnScreen = default;
     [SerializeField] float initialMoney = default;
 
-    private void Start() {
+    [Space]
+    [Header("Inventory attributes")]
+    [Space]
+
+    [SerializeField] string initialBagName = default;
+
+    private void Start(){
+        //mainBag.SpawnAllItensMain(GetBag(), initialBagName);
         ChangeMoney(initialMoney);
     }
-
-    //Check the key used to open the inventory
-    private void Update(){}
 
     public void ChangeMoney(float amount){
         IncreaceMoney(amount);
 
         moneyOnScreen.text = GetMoney().ToString();
+    }
+
+    public string GetInitialBagName(){
+        return initialBagName;
     }
 }

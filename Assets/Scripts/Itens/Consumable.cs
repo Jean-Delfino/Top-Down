@@ -14,10 +14,11 @@ public class Consumable : Item{
             pS.ChangeStatus(sC.GetStatus(), sC.GetValueChange());
         }
 
-        RemoveItem();
+        RemoveItem(pS);
     }
 
-    public override void RemoveItem(){
-        GetFatherOfItem().RemoveItemInBag(this.GetPosition());
+    public override void RemoveItem(PlayerStatus pS){
+        GetFatherOfItem().TakesItemInBag(this, 1);
+        //Changes the position in the inventory if the usage is 0
     }
 }

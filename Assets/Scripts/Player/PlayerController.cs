@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoMovingWithAnimation{
-    [SerializeField] GameObject interaction = default;
+    [SerializeField] Transform interaction = default;
     [SerializeField] Transform player = default;
 
     [SerializeField] float timeToIdle;
-    private float timeNotMoving;
+    private float timeNotMoving = 0f;
 
     private bool waitAction = false;
 
@@ -26,8 +26,10 @@ public class PlayerController : MonoMovingWithAnimation{
             DoAnimation("Vertical", true);
 
             if(moveY < 0){
-                player.eulerAngles = new Vector3(180, 0, 0);
+                print("ENTROU AQUI X");
+                player.eulerAngles = new Vector3(-180, 0, 0);
             }else{
+                print("Entrou Aqui Y");
                 player.eulerAngles = new Vector3(0, 0, 0);
             }
 
@@ -42,11 +44,14 @@ public class PlayerController : MonoMovingWithAnimation{
 
                 //Probably could be changed
                 if(moveX < 0){
+                    print("ENTROU AQUI Y");
                     player.eulerAngles = new Vector3(0, 180, 0);
                 }else{
+                    print("Entrou Aqui Y");
                     player.eulerAngles = new Vector3(0, 0, 0);
                 }
             }
+
             speedX = GetMoveSpeed() * moveX;
         }
 
@@ -67,14 +72,18 @@ public class PlayerController : MonoMovingWithAnimation{
     }
 
     public void ShowInteraction(){
-        interaction.SetActive(true);
+        interaction.gameObject.SetActive(true);
     }
 
     public void UnShowInteraction(){
-        interaction.SetActive(false);
+        interaction.gameObject.SetActive(false);
     }
     
     public void ChangeStateWait(bool state){
         waitAction = state;
+
+        if(waitAction){
+            base.Move(new Vector2(0, 0));
+        }
     }
 }

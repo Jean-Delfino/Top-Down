@@ -2,21 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//using UntiyEngine.UI;
+
 [System.Serializable]
 
 public abstract class Item{
     private Bag fatherInventory;
-    private int position;
+
+    [SerializeField] string uniqueID = default;
+
+    [SerializeField] string nameItem = default;
+    [SerializeField] Sprite itemIcon = default;
 
     [SerializeField] float value = default;
     [SerializeField] float weight = default;
 
-    public float GetWeight(){
-        return weight;
+    public string GetUniqueID(){
+        return uniqueID;
     }
 
-    public void SetWeight(float weight){
-        this.weight = weight;
+    public string GetNameItem(){
+        return nameItem;
+    }
+
+    public Sprite GetItemIcon(){
+        return itemIcon;
     }
 
     public float GetValue(){
@@ -27,24 +37,23 @@ public abstract class Item{
         this.value = value;
     }
 
+    public float GetWeight(){
+        return weight;
+    }
+
+    public void SetWeight(float weight){
+        this.weight = weight;
+    }
+
+
     public Bag GetFatherOfItem(){
         return fatherInventory;
     }
 
-    public void SetFatherOfItem(Bag fatherInventory, int position){
+    public void SetFatherOfItem(Bag fatherInventory){
         this.fatherInventory = fatherInventory;
-        SetPosition(position);
-    }
-
-    public int GetPosition(){
-        return position;
-    }
-
-    public void SetPosition(int position){
-        this.position = position;
     }
 
     public abstract void UseItem(PlayerStatus pS);
-    public abstract void RemoveItem();
-
+    public abstract void RemoveItem(PlayerStatus pS);
 }

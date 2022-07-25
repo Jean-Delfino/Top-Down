@@ -31,6 +31,10 @@ public class Clock : Subject{
         addMinutes(countMinutes);
     }
 
+    public void addMinutesOnlyVisual(int time){
+        
+    }
+
     public void addMinutes(int time){
         if(time < 1) return;
 
