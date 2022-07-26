@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using UnityEngine;
 
 using TMPro;
@@ -10,17 +13,16 @@ using TMPro;
 */
 
 public class Clock : Subject{
-    [SerializeField] TextMeshProUGUI clockReference = default;
-    [SerializeField] TextMeshProUGUI daysReference = default;
+    [SerializeField] Day daySubject = default;
 
-    [SerializeField] int minutesDilution; 
+    [SerializeField] TextMeshProUGUI clockReference = default;
+
+    [SerializeField] int minutesDilution = default;
 
     //More memory, but easier to work, and no cast
     private int actualSeconds = 0;
     private int actualMinutes = 0; 
     private int actualHours = 0; 
-
-    private int daysCount = 0;
 
     public void addSeconds(int time){
         actualSeconds += time;
@@ -31,18 +33,29 @@ public class Clock : Subject{
         addMinutes(countMinutes);
     }
 
-    public void addMinutesOnlyVisual(int time){
-        
+    public void addMinutesVisual(int time){
+        actualMinutes += time;
+        actualHours += UtilInt.checkBound(ref actualMinutes, 60);
+
+        ChangeActualTime();
     }
 
     public void addMinutes(int time){
         if(time < 1) return;
 
-        actualMinutes += time;
-        actualHours += UtilInt.checkBound(ref actualMinutes, 60);
+        addMinutesVisual(time);
 
-        ChangeActualTime();
         Notify(time);
+    }
+
+    public async void fastFowardTime(int clockTimeToPassInMin, int realWorldTimeInSec){
+        int tick = clockTimeToPassInMin / realWorldTimeInSec;
+        int i;
+
+        for(i = 0; i < realWorldTimeInSec; i++){
+            addMinutes(tick);
+            await Task.Delay(1 * 1000);
+        }
     }
 
     public void SetTime(int hours, int minutes){
@@ -53,27 +66,22 @@ public class Clock : Subject{
     }
 
     public void ChangeDay(){
-        DayChange(1);
+        daySubject.DayChange(1);
     }
 
     public void ChangeDay(int dayCount){
-        DayChange(dayCount);
+        daySubject.DayChange(dayCount);
     }
 
     private void ChangeActualTime(){
         if(actualHours > 24){
             actualHours = 0;
-            DayChange(1);
+            ChangeDay();
         }
 
         clockReference.text = 
             UtilStrings.ConvertPositiveNumberToFixedSize(actualHours, 2) + ":" + 
             UtilStrings.ConvertPositiveNumberToFixedSize(actualMinutes, 2);
-    }
-
-    private void DayChange(int addiction){
-        daysCount += addiction;
-        daysReference.text = daysCount.ToString();
     }
 
     //Observer pattern

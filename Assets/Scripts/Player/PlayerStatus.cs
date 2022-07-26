@@ -39,6 +39,10 @@ public class PlayerStatus : Observer{
         }
     }
 
+    public void ChangeStatus(StatusChange sC){
+        ChangeStatus(sC.GetStatus(), sC.GetValueChange());
+    }
+
     public void ChangeStatus(int index, int value){
         bool changeValue = needs[index].IncreaceStatus(value);
 

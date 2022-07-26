@@ -6,12 +6,14 @@ using UnityEngine;
     Portable food, water and other items
 */
 
+[CreateAssetMenu(fileName = "Consumable", menuName = "Items/Consumable", order = 0)]
+
 public class Consumable : Item{
     [SerializeField] List<StatusChange> affectedStatus = default;
 
     public override void UseItem(PlayerStatus pS){
         foreach(StatusChange sC in affectedStatus){
-            pS.ChangeStatus(sC.GetStatus(), sC.GetValueChange());
+            pS.ChangeStatus(sC);
         }
 
         RemoveItem(pS);

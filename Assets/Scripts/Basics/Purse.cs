@@ -11,7 +11,7 @@ using UnityEngine;
 public class Purse : MonoBehaviour{
     private float money = 0;
 
-    private Bag bag = new Bag();
+    [SerializeField] Bag bag = default;
 
     public void IncreaceMoney(float amount){
         money += amount;
@@ -23,5 +23,9 @@ public class Purse : MonoBehaviour{
 
     public Bag GetBag(){
         return bag;
+    }
+
+    public string GetBagName(){
+        return bag.GetNameItem();
     }
 }

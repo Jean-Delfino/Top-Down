@@ -12,12 +12,6 @@ public class PlayerInventory : Purse{
     [SerializeField] TextMeshProUGUI moneyOnScreen = default;
     [SerializeField] float initialMoney = default;
 
-    [Space]
-    [Header("Inventory attributes")]
-    [Space]
-
-    [SerializeField] string initialBagName = default;
-
     private void Start(){
         //mainBag.SpawnAllItensMain(GetBag(), initialBagName);
         ChangeMoney(initialMoney);
@@ -30,6 +24,6 @@ public class PlayerInventory : Purse{
     }
 
     public string GetInitialBagName(){
-        return initialBagName;
+        return GetBagName();
     }
 }

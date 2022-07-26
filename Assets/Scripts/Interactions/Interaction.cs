@@ -6,31 +6,33 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Interaction : MonoBehaviour{
-    [SerializeField] UnityEvent onInteractionEvents = default;
+    [SerializeField] UnityEvent2 onInteractionEvents = default;
     [SerializeField] float totalTimeAction = default;
 
-    private Coroutine save = null;
-    Action exitAction = null;
+    protected Coroutine save = null;
+    protected Action exitAction = null;
 
-    private bool notUsing = true;
+    protected bool notUsing = true;
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    protected bool OnTriggerEnter2D(Collider2D other) {
         if(notUsing && other.gameObject.tag == "Player"){
             save = StartCoroutine(StartInteraction(
                     other.gameObject.GetComponent<PlayerController>()));
                 
             notUsing = false;
+            return true;
         }
+        return false;
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
+    protected void OnTriggerExit2D(Collider2D other) {
         if(save != null){
             StopInteraction();
             notUsing = true;
         }
     }
 
-    private IEnumerator StartInteraction(PlayerController pC){
+    protected IEnumerator StartInteraction(PlayerController pC){
         pC.ShowInteraction();
 
         exitAction = pC.UnShowInteraction;
@@ -49,7 +51,7 @@ public class Interaction : MonoBehaviour{
         }
     }
 
-    private void StopInteraction(){
+    protected void StopInteraction(){
         StopCoroutine(save);
 
         if (exitAction != null) {
@@ -59,7 +61,11 @@ public class Interaction : MonoBehaviour{
         exitAction = null;
     }
 
+    public UnityEvent2 GetOnInteractionEvents(){
+        return this.onInteractionEvents;
+    }
 
-
-
+    public float GetTotalTimeAction(){
+        return this.totalTimeAction;
+    }
 }

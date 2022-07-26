@@ -6,13 +6,20 @@ using UnityEngine;
 
 [System.Serializable]
 
-public abstract class Item{
+public abstract class Item : ScriptableObject{
     private Bag fatherInventory;
 
-    [SerializeField] string uniqueID = default;
+    [Space]
+    [Header("Defining item attribute")]
+    [Space]
 
+    [SerializeField] string uniqueID = default;
     [SerializeField] string nameItem = default;
     [SerializeField] Sprite itemIcon = default;
+
+    [Space]
+    [Header("Value and Weight")]
+    [Space]
 
     [SerializeField] float value = default;
     [SerializeField] float weight = default;

@@ -45,10 +45,17 @@ public class InventoryUI : MonoBehaviour{
     }
     
     private IEnumerator CheckInventory(){
+        bool unpressedButton = true;
+        float getAxis;
         while(true){
-            if(Input.GetAxis("Inventory") != 0){
-                inventory.SetActive(!inventory.activeSelf);
-                yield return new WaitForSeconds(0.2f);
+            getAxis = Input.GetAxisRaw("Inventory");
+
+            if(unpressedButton && getAxis != 0){
+                    unpressedButton = false;
+                    inventory.SetActive(!inventory.activeSelf);
+                    yield return new WaitForSeconds(0.2f);
+            }else if(getAxis == 0){
+                unpressedButton = true;
             }
             yield return null;
         }

@@ -12,9 +12,9 @@ using UnityEngine;
 
     The bag player is not inside any bag
 */
+[CreateAssetMenu(fileName = "Bag", menuName = "Items/Bag", order = 0)]
 
 public class Bag : Item{
-    //private List<Item> content = new List<Item>();
     private Dictionary<Item, int> content = new Dictionary<Item, int>();
 
     [SerializeField] float weightLimit = default;

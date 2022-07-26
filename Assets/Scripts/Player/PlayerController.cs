@@ -26,10 +26,10 @@ public class PlayerController : MonoMovingWithAnimation{
             DoAnimation("Vertical", true);
 
             if(moveY < 0){
-                print("ENTROU AQUI X");
+                //print("ENTROU AQUI X");
                 player.eulerAngles = new Vector3(-180, 0, 0);
             }else{
-                print("Entrou Aqui Y");
+                //print("Entrou Aqui Y");
                 player.eulerAngles = new Vector3(0, 0, 0);
             }
 
@@ -44,10 +44,10 @@ public class PlayerController : MonoMovingWithAnimation{
 
                 //Probably could be changed
                 if(moveX < 0){
-                    print("ENTROU AQUI Y");
+                    //print("ENTROU AQUI Y");
                     player.eulerAngles = new Vector3(0, 180, 0);
                 }else{
-                    print("Entrou Aqui Y");
+                    //print("Entrou Aqui Y");
                     player.eulerAngles = new Vector3(0, 0, 0);
                 }
             }
