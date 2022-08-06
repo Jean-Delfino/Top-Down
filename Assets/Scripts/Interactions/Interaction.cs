@@ -14,15 +14,25 @@ public class Interaction : MonoBehaviour{
 
     protected bool notUsing = true;
 
-    protected bool OnTriggerEnter2D(Collider2D other) {
-        if(notUsing && other.gameObject.tag == "Player"){
-            save = StartCoroutine(StartInteraction(
+    protected void OnTriggerEnter2D(Collider2D other) {
+        print("ENTROU NORMAL");
+        if(other.isTrigger && other.gameObject.tag == "Player"){
+            StartCoroutineInteraction(StartInteraction(
                     other.gameObject.GetComponent<PlayerController>()));
-                
-            notUsing = false;
-            return true;
         }
-        return false;
+    }
+
+    protected void OnTriggerEnter2D(Collider2D other, IEnumerator routine) {
+        print("ENTROU AQUI ?");
+        if(other.gameObject.tag == "Player"){
+            StartCoroutineInteraction(routine);
+        }
+    }
+
+    protected void StartCoroutineInteraction(IEnumerator routine){
+        if(save == null){
+            save = StartCoroutine(routine);
+        }
     }
 
     protected void OnTriggerExit2D(Collider2D other) {
@@ -33,21 +43,24 @@ public class Interaction : MonoBehaviour{
     }
 
     protected IEnumerator StartInteraction(PlayerController pC){
+        
         pC.ShowInteraction();
 
         exitAction = pC.UnShowInteraction;
 
         while(true){
-            while(Input.GetAxis("Interaction") == 0){
+            while(Input.GetAxis("Interaction") == 0 && notUsing){
                 yield return null;
             }
 
+            notUsing = false;
             pC.ChangeStateWait(true);
             onInteractionEvents.Invoke();
 
             yield return new WaitForSeconds(totalTimeAction);
 
             pC.ChangeStateWait(false);
+            notUsing = true;
         }
     }
 
@@ -57,7 +70,7 @@ public class Interaction : MonoBehaviour{
         if (exitAction != null) {
             exitAction();
         }
-
+        save = null;
         exitAction = null;
     }
 
@@ -67,5 +80,9 @@ public class Interaction : MonoBehaviour{
 
     public float GetTotalTimeAction(){
         return this.totalTimeAction;
+    }
+
+    public void ChangeNotUsing(bool state){
+        notUsing = state;
     }
 }

@@ -40,7 +40,12 @@ public class PlayerStatus : Observer{
     }
 
     public void ChangeStatus(StatusChange sC){
-        ChangeStatus(sC.GetStatus(), sC.GetValueChange());
+        if(sC.GetTypeStatus() != TypeStatus.Life){
+            ChangeStatus(sC.GetStatus(), sC.GetValueChange());
+            return;
+        }
+
+        ChangeLife(sC.GetValueChange());
     }
 
     public void ChangeStatus(int index, int value){

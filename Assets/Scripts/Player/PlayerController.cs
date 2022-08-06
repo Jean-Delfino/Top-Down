@@ -86,4 +86,8 @@ public class PlayerController : MonoMovingWithAnimation{
             base.Move(new Vector2(0, 0));
         }
     }
+
+    public void ChangePosition(Vector3 newPos){
+        this.transform.position = newPos;
+    }
 }

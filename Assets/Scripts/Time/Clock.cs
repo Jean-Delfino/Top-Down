@@ -52,6 +52,8 @@ public class Clock : Subject{
         int tick = clockTimeToPassInMin / realWorldTimeInSec;
         int i;
 
+        print("TICK = " + tick);
+
         for(i = 0; i < realWorldTimeInSec; i++){
             addMinutes(tick);
             await Task.Delay(1 * 1000);

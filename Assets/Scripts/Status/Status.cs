@@ -9,7 +9,8 @@ public enum TypeStatus{
     Thirst,
     Cleanliness,
     Sleep,
-    Happiness
+    Happiness,
+    Life
 }
 
 [System.Serializable]
@@ -24,6 +25,10 @@ public class StatusChange{
 
     public int GetStatus(){
         return (int) status;
+    }
+
+    public TypeStatus GetTypeStatus(){
+        return status;
     }
 }
 

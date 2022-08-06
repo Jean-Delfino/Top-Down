@@ -23,4 +23,12 @@ public class CameraFollow : MonoBehaviour{
 
         transform.position = boundPosition;
     }
+
+    public void ChangeMinValue(Vector3 minValue){
+        this.minValue = minValue;
+    }
+
+    public void ChangeMaxValue(Vector3 maxValue){
+        this.maxValue = maxValue;
+    }
 }
