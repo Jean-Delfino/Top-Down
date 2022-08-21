@@ -40,9 +40,17 @@ public class Bag : Item{
     public bool AddItem(Item item){
         return AddItem(item, 1);
     }
-    
+
+    public int GetItemQtd(Item item){
+        if(content.ContainsKey(item)){
+            return content[item];
+        }
+
+        return 0;
+    }
+
     public bool AddItem(Item item, int qtd){
-        float totalWeight = (item.GetValue() * qtd) + this.GetWeight();
+        float totalWeight = (item.GetWeight() * qtd) + this.GetWeight();
         if(totalWeight > weightLimit) return false;
 
         item.SetFatherOfItem(this);

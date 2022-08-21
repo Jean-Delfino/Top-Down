@@ -17,6 +17,10 @@ public class Purse : MonoBehaviour{
         money += amount;
     }
 
+    public bool AddItem(Item item){
+        return bag.AddItem(item);
+    }
+
     public float GetMoney(){
         return money;
     }

@@ -16,11 +16,16 @@ public class Consumable : Item{
             pS.ChangeStatus(sC);
         }
 
-        RemoveItem(pS);
+        RemoveItem(pS, 1);
+    }
+
+    public void RemoveItem(PlayerStatus pS, int qtd){
+        GetFatherOfItem().TakesItemInBag(this, qtd);
+        //Changes the position in the inventory if the usage is 0
     }
 
     public override void RemoveItem(PlayerStatus pS){
-        GetFatherOfItem().TakesItemInBag(this, 1);
+        GetFatherOfItem().RemoveItemInBag(this);
         //Changes the position in the inventory if the usage is 0
     }
 }

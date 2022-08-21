@@ -20,6 +20,10 @@ public class InventorySlot : MonoBehaviour{
         this.father = father;
     }
 
+    public void ChangeSlotQtd(int qtd){
+        qtdItem.text = qtd.ToString();
+    }
+
     public void UseItem(){
         father.UseItem(it);
     }

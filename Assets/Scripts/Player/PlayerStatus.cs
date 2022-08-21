@@ -10,7 +10,7 @@ public class PlayerStatus : Observer{
     [Header("Status variables")]
     [Space]
 
-    [SerializeField] Subject toSubscribe = default;
+    [SerializeField] Subject clock = default;
     [SerializeField] PlayerStatusUIManager pSM = default;
 
     [SerializeField] List<Status> needs = default;
@@ -19,10 +19,10 @@ public class PlayerStatus : Observer{
     [Header("Inventory variables")]
     [Space]
 
-    [SerializeField] PlayerInventory playerInventory = default;
+    [SerializeField] InventoryUI playerInventoryUI = default;
 
     private void Start() {
-        toSubscribe.RegisterObserver(this);
+        clock.RegisterObserver(this);
 
         pSM.SpawnStatus(needs);
         ChangeLife(100);
@@ -66,11 +66,12 @@ public class PlayerStatus : Observer{
         pSM.ChangeSliderHealth(health);
     }
 
-    public Bag GetInventoryBag(){
-        return playerInventory.GetBag();
+    public void InventoryUISetup(PlayerInventory playerInventory){
+        playerInventoryUI.Setup(playerInventory);
     }
 
-    public string GetInitialBagName(){
-        return playerInventory.GetInitialBagName();
+    public void InventoryUIAddItem(Item item, int qtd){
+        playerInventoryUI.AddItem(item, qtd);
     }
+
 }

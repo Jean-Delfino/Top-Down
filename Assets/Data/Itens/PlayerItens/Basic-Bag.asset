@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b88108d53410fc84aaa9bd52ff7eb1df, type: 3}
-  m_Name: Bag
+  m_Name: Basic-Bag
   m_EditorClassIdentifier: 
   uniqueID: Basic-Bag
-  nameItem: Divinity 2
+  nameItem: School Bag
   itemIcon: {fileID: 21300000, guid: 0a5449ef75f241843a8beb8872877fd5, type: 3}
   value: 100
-  weight: 0.2
+  weight: 0.20000005
   weightLimit: 30
