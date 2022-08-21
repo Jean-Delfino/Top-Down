@@ -1,3 +1,5 @@
+
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,8 +41,8 @@ public static class UtilItem{
                 return true;
             }
 
-            foreach(Bag bg in hold.GetContent()){
-                additionalBags.Enqueue(bg);
+            foreach(Bag bg in hold.GetContent().OfType<Bag>().ToList()){
+                additionalBags.Enqueue((Bag)bg);
             }
         }
 

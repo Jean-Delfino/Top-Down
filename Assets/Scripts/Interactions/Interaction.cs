@@ -14,8 +14,7 @@ public class Interaction : MonoBehaviour{
 
     protected bool notUsing = true;
 
-    protected void OnTriggerEnter2D(Collider2D other) {
-        print("ENTROU NORMAL");
+    protected virtual void OnTriggerEnter2D(Collider2D other) {
         if(other.isTrigger && other.gameObject.tag == "Player"){
             StartCoroutineInteraction(StartInteraction(
                     other.gameObject.GetComponent<PlayerController>()));
@@ -23,7 +22,6 @@ public class Interaction : MonoBehaviour{
     }
 
     protected void OnTriggerEnter2D(Collider2D other, IEnumerator routine) {
-        print("ENTROU AQUI ?");
         if(other.gameObject.tag == "Player"){
             StartCoroutineInteraction(routine);
         }
@@ -35,14 +33,14 @@ public class Interaction : MonoBehaviour{
         }
     }
 
-    protected void OnTriggerExit2D(Collider2D other) {
+    protected virtual void OnTriggerExit2D(Collider2D other) {
         if(save != null){
             StopInteraction();
             notUsing = true;
         }
     }
 
-    protected IEnumerator StartInteraction(PlayerController pC){
+    protected virtual IEnumerator StartInteraction(PlayerController pC){
         
         pC.ShowInteraction();
 

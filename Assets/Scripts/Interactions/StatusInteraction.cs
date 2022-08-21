@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class StatusInteraction : Interaction{
     [Space]
     [Header("Status interaction values")]
@@ -11,7 +9,7 @@ public class StatusInteraction : Interaction{
 
     [SerializeField] List<StatusChange> onInteractionChange = default;
 
-    private new void OnTriggerEnter2D(Collider2D other){
+    protected override void OnTriggerEnter2D(Collider2D other){
         OnTriggerEnter2D(other, 
             StartInteraction(other.gameObject.GetComponent<PlayerController>()));
     }
@@ -24,7 +22,7 @@ public class StatusInteraction : Interaction{
         }
     }
 
-    protected new IEnumerator StartInteraction(PlayerController pC){
+    protected override IEnumerator StartInteraction(PlayerController pC){
         pC.ShowInteraction();
 
         exitAction = pC.UnShowInteraction;

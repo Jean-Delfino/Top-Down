@@ -7,12 +7,12 @@ using UnityEngine.Events;
 public class NeedToFinishInteraction : Interaction{
     [SerializeField] UnityEvent2 onFinishEvent = default;
  
-    private new void OnTriggerEnter2D(Collider2D other){
+    protected override void OnTriggerEnter2D(Collider2D other){
         OnTriggerEnter2D(other, 
             StartInteraction(other.gameObject.GetComponent<PlayerController>()));
     }
 
-    protected new IEnumerator StartInteraction(PlayerController pC){
+    protected override IEnumerator StartInteraction(PlayerController pC){
         pC.ShowInteraction();
 
         exitAction = pC.UnShowInteraction;

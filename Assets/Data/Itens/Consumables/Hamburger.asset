@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 510e31180e30e234b9527d58808e8802, type: 3}
-  m_Name: BottleOfWater
+  m_Name: Hamburger
   m_EditorClassIdentifier: 
-  uniqueID: BottleOfWater
-  nameItem: Bottle of Water
-  itemIcon: {fileID: 21300000, guid: 99c427a41555ff54d88d4f5892f09c68, type: 3}
-  value: 2
-  weight: 1
-  affectedStatus:
-  - status: 1
-    value: 30
+  uniqueID: 
+  nameItem: 
+  itemIcon: {fileID: 0}
+  value: 0
+  weight: 0
+  affectedStatus: []

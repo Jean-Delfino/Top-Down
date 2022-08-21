@@ -23,6 +23,10 @@ public class Bag : Item{
         return content.Keys.ToList();
     }
 
+    public bool SearchItem(Item item){
+        return UtilItem.SearchItem(this, item);
+    }
+
     public Dictionary<Item, int> GetContentDictionary(){
         return content;
     }

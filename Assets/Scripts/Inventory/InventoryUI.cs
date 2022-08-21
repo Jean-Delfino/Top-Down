@@ -33,7 +33,6 @@ public class InventoryUI : MonoBehaviour{
         InventorySlot invS;
 
         foreach(KeyValuePair<Item, int> kvp in mainBag.GetContentDictionary()){
-            print("TEM UM ITEM");
             CreateSlot(kvp.Key, kvp.Value);
         }
 

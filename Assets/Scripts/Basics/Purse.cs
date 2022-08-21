@@ -21,6 +21,10 @@ public class Purse : MonoBehaviour{
         return bag.AddItem(item);
     }
 
+    public bool AddItem(Item item, int qtd){
+        return bag.AddItem(item, qtd);
+    }
+
     public float GetMoney(){
         return money;
     }

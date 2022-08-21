@@ -25,17 +25,20 @@ public class PlayerInventory : Purse{
         ChangeMoney(initialMoney);
 
         playerStatus.InventoryUISetup(this);
-        AddItem("Chocolate-Bar");
-        AddItem("Chocolate-Bar");
-        AddItem("BottleOfWater");
+        AddItem("Chocolate-Bar", 2);
+        AddItem("BottleOfWater", 1);
     }
 
-    public bool AddItem(string uniqueIDitem){
+    public bool AddItem(string uniqueIDitem, int qtd){
         var result = AssetDatabase.FindAssets(uniqueIDitem);
         var path = AssetDatabase.GUIDToAssetPath(result[0]);
         var item = (Item) AssetDatabase.LoadAssetAtPath(path, typeof(Item));
 
-        var addItemResult = base.AddItem((Item)item);
+        return AddItem(item, qtd);
+    }
+
+    public bool AddItem(Item item, int qtd){
+        var addItemResult = base.AddItem((Item)item, qtd);
         playerStatus.InventoryUIAddItem(item, GetItemQtd(item));
 
         return addItemResult;
