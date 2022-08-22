@@ -8,23 +8,22 @@ using TMPro;
 
 public class PlayerInventory : Purse{
     [Space]
-    [Header("Money attributes")]
+    [Header("   Money attributes")]
     [Space]
 
     [SerializeField] TextMeshProUGUI moneyOnScreen = default;
     [SerializeField] float initialMoney = default;
 
-    [Space]
-    [Header("Inventory attributes")]
-    [Space]
-
-    [SerializeField] PlayerStatus playerStatus = default;
+    private PlayerStatus playerStatus = default;
 
     private void Start(){
         //mainBag.SpawnAllItensMain(GetBag(), initialBagName);
+        playerStatus = GetComponent<PlayerStatus>();
         ChangeMoney(initialMoney);
 
+        CreateBag();
         playerStatus.InventoryUISetup(this);
+
         AddItem("Chocolate-Bar", 2);
         AddItem("BottleOfWater", 1);
     }
@@ -32,7 +31,8 @@ public class PlayerInventory : Purse{
     public bool AddItem(string uniqueIDitem, int qtd){
         var result = AssetDatabase.FindAssets(uniqueIDitem);
         var path = AssetDatabase.GUIDToAssetPath(result[0]);
-        var item = (Item) AssetDatabase.LoadAssetAtPath(path, typeof(Item));
+        var itemData = (Item) AssetDatabase.LoadAssetAtPath(path, typeof(Item));
+        var item = Instantiate(itemData);
 
         return AddItem(item, qtd);
     }

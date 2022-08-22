@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510e31180e30e234b9527d58808e8802, type: 3}
   m_Name: Hamburger
   m_EditorClassIdentifier: 
-  uniqueID: 
-  nameItem: 
-  itemIcon: {fileID: 0}
-  value: 0
-  weight: 0
-  affectedStatus: []
+  uniqueID: Hamburger
+  nameItem: "Hamburg\xE3o"
+  itemIcon: {fileID: 21300000, guid: 0c8f4d518f7cb084384274712d8f04d2, type: 3}
+  value: 25
+  weight: 0.3
+  affectedStatus:
+  - status: 0
+    value: 50
+  - status: 1
+    value: -10
+  - status: 2
+    value: -10
+  - status: 4
+    value: 5

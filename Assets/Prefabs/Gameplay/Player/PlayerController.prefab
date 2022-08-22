@@ -352,7 +352,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.4, y: 3.6}
+    oldSize: {x: 3.6, y: 2.4}
     newSize: {x: 3.6, y: 2.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  interaction: {fileID: 3409499192246321442}
+  interaction: {fileID: 3409499192246321453}
   player: {fileID: 3409499191747450054}
   timeToIdle: 10
 --- !u!114 &3409499191747450060
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3015cd04cee1a7946af4037d4b7edbf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bag: {fileID: 0}
+  bag: {fileID: 11400000, guid: af37098367dada848981e45a8e5b9e7e, type: 2}
   moneyOnScreen: {fileID: 0}
   initialMoney: 300
 --- !u!114 &3409499191747450050
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642306a29dd0ed242bfa57b47740f2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSubscribe: {fileID: 0}
+  clock: {fileID: 0}
   pSM: {fileID: 3409499191747450051}
   needs:
   - status: 0
@@ -437,7 +437,7 @@ MonoBehaviour:
     killerStatus: 0
     actionDeficiencyStatus: 20
     actualValueStatus: 100
-  playerInventory: {fileID: 3409499191747450060}
+  playerInventoryUI: {fileID: 0}
 --- !u!114 &3409499191747450051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,7 +553,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9932963a34a6c25439505fea0ae6ff9c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d37d4ccd8418da34098315e61bb60a32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

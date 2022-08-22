@@ -13,6 +13,11 @@ public class Purse : MonoBehaviour{
 
     [SerializeField] Bag bag = default;
 
+    //Protection from changing the original prefab
+    protected void CreateBag(){
+        bag = Instantiate(bag);
+    }
+
     public void IncreaceMoney(float amount){
         money += amount;
     }
