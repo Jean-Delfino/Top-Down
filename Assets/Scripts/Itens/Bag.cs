@@ -27,6 +27,10 @@ public class Bag : Item{
         return UtilItem.SearchItem(this, item);
     }
 
+    public bool SearchItem(Item item, int qtd){
+        return UtilItem.SearchItem(this, item);
+    }
+
     public Dictionary<Item, int> GetContentDictionary(){
         return content;
     }

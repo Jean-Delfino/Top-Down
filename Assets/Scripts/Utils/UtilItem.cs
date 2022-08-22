@@ -48,4 +48,26 @@ public static class UtilItem{
 
         return false;
     }
+
+    public static bool SearchItem(Bag bag, Item it, int qtd){
+        Queue<Bag> additionalBags = new Queue<Bag>();
+        Bag hold;
+
+        additionalBags.Enqueue(bag);
+
+        while(additionalBags.Count != 0){
+            hold = additionalBags.Dequeue();
+            var dict = hold.GetContentDictionary();
+
+            if(dict.ContainsKey(it) && dict[it] >= qtd){
+                return true;
+            }
+
+            foreach(Bag bg in dict.Keys.ToList().OfType<Bag>().ToList()){
+                additionalBags.Enqueue((Bag)bg);
+            }
+        }
+
+        return false;
+    }
 }

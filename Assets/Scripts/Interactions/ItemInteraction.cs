@@ -9,8 +9,14 @@ public class ItemInteraction : Interaction{
 
     [Serializable]
     public class ItemWithEvent{
-        public UnityEvent<PlayerInventory, Item> itemActions;
-        public List<Item> itens;
+        public UnityEvent<PlayerInventory, Item, int> itemActions;
+        public List<ItemWithQtd> itemWithQtd;
+    }
+
+    [Serializable]
+    public class ItemWithQtd{
+        public Item item;
+        public int qtd;
     }
 
     [SerializeField] List<ItemWithEvent> eventItens = default;
@@ -36,9 +42,10 @@ public class ItemInteraction : Interaction{
             PlayerInventory pI = pC.gameObject.GetComponent<PlayerInventory>();
 
             for(i = 0; i < eventItens.Count && continueItemActions; i++){
-                for(j = 0; j < eventItens[i].itens.Count && continueItemActions; j++){
+                for(j = 0; j < eventItens[i].itemWithQtd.Count && continueItemActions; j++){
                     eventItens[i].itemActions.Invoke(
-                        pI, eventItens[i].itens[j]);
+                        pI, eventItens[i].itemWithQtd[j].item,
+                        eventItens[i].itemWithQtd[j].qtd);
                 }
             }
 
@@ -49,11 +56,11 @@ public class ItemInteraction : Interaction{
         }
     }
 
-    public void SearchItem(PlayerInventory playerInventory, Item item){
+    public void SearchItem(PlayerInventory playerInventory, Item item, int qtd){
         continueItemActions = playerInventory.GetInventoryBag().SearchItem(item);
     }
 
-    public void AddItem(PlayerInventory playerInventory, Item item){
-        playerInventory.AddItem(item, 1);
+    public void AddItem(PlayerInventory playerInventory, Item item, int qtd){
+        playerInventory.AddItem(item, qtd);
     }
 }
